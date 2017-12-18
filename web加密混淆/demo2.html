@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>加密</title>
+</head>
+<body>
+    <script>    
+
+        // 2使用^多重加密
+        function bitEncode(pwd,str){
+            var end = '';
+            for(i=0;i<str.length;i++){
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    var pwdStr = str.charCodeAt(i) ^ key;
+                }
+                end += String.fromCharCode(pwdStr);
+            }
+            return end;
+        }
+
+        // 多重加密2（8进制）
+        var _key = 'paotuiweb';//字符串中的字母不能重复
+        function encode(pwd,num,str){
+            var end = '';
+            for(i=0;i<str.length;i++){
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    var pwdStr = str.charCodeAt(i) ^ key;
+                }              
+                pwdStr = (parseInt(pwdStr,16)<<2).toString(8);               
+                var endStr = '';
+                for(var j=0;j<pwdStr.length;j++){
+                    var item = pwdStr[j];
+                    endStr += _key[item];
+                }
+                var ee = '';
+                for(var k = 0;k<endStr.length;k++){
+                    ee +=  String.fromCharCode(endStr.charCodeAt(k) ^ num.charCodeAt(0));
+                }
+                end  += '\\\\u'+ee;
+            }
+            return end;
+        }
+
+        function decode(pwd,num,str){
+            var end = '';
+            var strArr = str.split('\\\\u');
+            var innerArr = [];
+            strArr.shift();
+            for(i=0;i<strArr.length;i++){
+                var item = strArr[i];
+                var char = '';
+                for(var j = 0; j< item.length;j++){
+                   char += String.fromCharCode(item.charCodeAt(j) ^  num.charCodeAt(0));
+                }
+               innerArr.push(char);
+            }            
+            var outArr = [];
+            for(var k=0;k<innerArr.length;k++){
+                var litem = innerArr[k];
+                var enditem = '';
+                for(var m = 0,len = litem.length;m<len;m++){
+                    var mitem = litem[m];
+                    var ind = _key.indexOf(mitem);
+                    enditem +=ind;
+                }
+                outArr.push(enditem);
+            }
+            for(var g=0;g<outArr.length;g++){
+                var ggitem = outArr[g];
+                var gitem = ((parseInt(outArr[g],8)>>2).toString(16));             
+
+
+                var genditem = '';
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    genditem = gitem ^ key;
+                }
+                end +=String.fromCharCode(genditem);
+            }
+            return end;
+        }
+
+         // 多重加密3(8进制)
+         var _key = 'paotuiweb';//字符串中的字母不能重复
+        function encodee(pwd,str){
+            var end = '';
+            for(i=0;i<str.length;i++){
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    var pwdStr = str.charCodeAt(i) ^ key;
+                }    
+                     
+                pwdStr = (parseInt(pwdStr,16)<<2).toString(8);               
+                var endStr = '';
+                for(var j=0;j<pwdStr.length;j++){
+                    var item = pwdStr[j];
+                    endStr += _key[item];
+                }             
+                end  += '\\\\u'+endStr;
+            }
+            return end;
+        }
+
+        function decodee(pwd,str){
+            var end = '';
+            var staArr = str.split('\\\\u');
+            staArr.shift();
+            var innerArr = [];
+            for(var i=0;i<staArr.length;i++){               
+                var item = staArr[i];
+                var iItem = '';
+                for(var j=0;j<item.length;j++){                    
+                    var jitem = item[j];
+                    var ind = _key.indexOf(jitem);
+                    iItem +=ind;
+                }
+               innerArr.push((parseInt(iItem,8)>>2).toString(16));
+            }
+           
+            for(var k=0;k<innerArr.length;k++){
+                var kItem = innerArr[k];
+                var endItem = '';
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    endItem = kItem ^ key;
+                }     
+                end += String.fromCharCode(endItem);    
+            }
+            return end;
+        }
+
+         // 多重加密3(32进制)
+         var _key = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';//字符串中的字母不能重复
+        function encode32(pwd,str){
+            var v = _key[Math.floor(Math.random()*20)+32];
+            var str = ''+str;
+            var end = '';
+            var result={};
+            for(i=0;i<str.length;i++){
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    var pwdStr = str.charCodeAt(i) ^ key;
+                }            
+                pwdStr = (parseInt(pwdStr,16)<<3).toString(32);      
+                var endStr = '';
+                for(var j=0;j<pwdStr.length;j++){
+                    var item =parseInt(pwdStr[j],32);
+                    endStr += _key[item];
+                }             
+                end  += v+endStr;
+            }
+            result.str = end;
+            result.v = v;
+            return result;
+        }
+
+        function decode32(pwd,result){
+            var end = '';
+            var staArr = result.str.split(result.v);
+            staArr.shift();
+            var innerArr = [];
+            for(var i=0;i<staArr.length;i++){               
+                var item = staArr[i];
+                var iItem = '';
+                for(var j=0;j<item.length;j++){                    
+                    var jitem = item[j];
+                    var ind = _key.indexOf(jitem);
+                    iItem +=ind.toString(32);
+                }
+               innerArr.push((parseInt(iItem,32)>>3).toString(16));
+            }
+           
+            for(var k=0;k<innerArr.length;k++){
+                var kItem = innerArr[k];
+                var endItem = '';
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    endItem = kItem ^ key;
+                }     
+                end += String.fromCharCode(endItem);    
+            }
+            return end;
+        }
+       
+       
+    </script>
+    <script>
+        var strAttr = '我是中国人';
+        console.log('1.............多重key');
+        var btiStr = bitEncode('abc',strAttr);
+        console.log(btiStr);
+        console.log(bitEncode('abc',btiStr));
+
+        console.log('\n');
+        console.log('2.............8进制');
+        var codeA = encode('woshi','w',strAttr);
+        console.log(codeA);
+        console.log(decode('woshi','w',codeA))
+
+        console.log('\n');
+        console.log('3.............8进制');
+        var codeB = encodee('woshi',strAttr);
+        console.log(codeB);
+        console.log(decodee('woshi',codeB))
+
+        console.log('\n');
+        console.log('3.............32进制');
+        var codeC = encode32('upaotui',strAttr);
+        console.log(codeC);
+        console.log(decode32('upaotui',codeC))
+       
+    </script>
+</body>
+</html>

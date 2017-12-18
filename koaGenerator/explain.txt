@@ -1,0 +1,6 @@
+1、npm install -g koa-generator
+2、koa2 kaoPorject -e
+3、npm install
+4、修改package里面的start为 set DEBUG=app:* && node bin/www
+5、修改www文件中的var debug = require('debug')('app:server');
+6、运行 npm start

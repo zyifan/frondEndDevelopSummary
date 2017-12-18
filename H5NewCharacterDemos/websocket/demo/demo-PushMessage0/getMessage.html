@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <title>web socket demo</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html,body{height:100%;}
+      body { font: 13px Helvetica, Arial;padding:50px;}
+      h2{margin-bottom:30px;}
+      button{margin-bottom:30px;}
+      ul li{
+        line-height:30px;
+        color:#666;
+        border-bottom:1px solid #eee;
+        list-style: none;
+      }
+    </style>
+  </head>
+    
+  <body>  
+    <h2>每隔2s获取一条消息：</h2>
+    <Button>关闭websocket</Button>
+    <ul id="msgContainer"></ul>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+        var ws;
+        $('button').click(function(){
+          if(ws){
+            ws.close();
+          }
+        })
+         function WebSocketTest()
+         {
+            if ("WebSocket" in window)
+            {
+               console.log("您的浏览器支持 WebSocket!");
+               
+               // 打开一个 web socket
+               ws = new WebSocket("ws://localhost:3222/ws");
+                
+               ws.onopen = function(){
+                  // Web Socket 已连接上，使用 send() 方法发送数据
+                  ws.send("发送数据");
+                  console.log("数据发送中...");
+               };
+                
+               ws.onmessage = function (evt) { 
+                  var received_msg = evt.data;
+                  console.log("数据已接收...");
+                  $('#msgContainer').append('<li>'+received_msg+'</li>')
+
+               };
+                
+               ws.onclose = function(){ 
+                  // 关闭 websocket
+                  console.log("连接已关闭..."); 
+               };
+
+            }else{
+               // 浏览器不支持 WebSocket
+               alert("您的浏览器不支持 WebSocket!");
+            }
+         }
+         WebSocketTest();
+      </script>
+  </body>
+</html>

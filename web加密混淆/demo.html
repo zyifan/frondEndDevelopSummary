@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>加密</title>
+</head>
+<body>
+    <script>     
+
+        // 转为unicode 编码  
+        function encodeUnicode(str) {  
+            var res = [];  
+            for ( var i=0; i<str.length; i++ ) {  
+                res[i] = ( "00" + str.charCodeAt(i).toString(16) ).slice(-4);  
+            }  
+            return {codeArr:res,unicode:"\\u" + res.join("\\u")  }
+        }
+        // 解码 unicode 编码  
+        function decodeUnicode(str) {  
+            str = str.replace(/\\/g, "%");  
+            return unescape(str);  
+        }  
+        
+        // 1使用^加密
+        var accid=23709405;
+        var d = parseInt(accid) % 10; 
+        var str = '君阅南湖小区 (南湖北路650号，贵龙修理厂，一号立井加油站旁)67';
+        function encodestr(str, r)
+        {
+            if (str) {
+                for (var t = "", i = 0, len = str.length; i < len; i++) {
+                    t += String.fromCharCode(str.charCodeAt(i) ^ r);
+                }
+                return t
+            }
+            return ""
+        }
+        document.write(encodestr("吞阀卒湓尊匿%-卒湓匒跪305史）贰龜俫球厇）丅史竎亐劥沼竜旄,32",d));
+
+        // 2使用^多重加密
+        function bitEncode(pwd,str){
+            var end = '';
+            for(i=0;i<str.length;i++){
+                for(j=0;j<pwd.length;j++){
+                    var key = pwd.charCodeAt(j);
+                    var pwdStr = str.charCodeAt(i) ^ key;
+                }
+                end += String.fromCharCode(pwdStr);
+            }
+            return end;
+        }
+
+
+         // 3、4
+         var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+         base64Encode = function(r) {
+            if (!r) return "";
+            var e, t, n, o, a, c, f, h = "",d = 0;
+            for (r = _utf8_encode(r); d < r.length;) {
+                e = r.charCodeAt(d++), 
+                t = r.charCodeAt(d++), 
+                n = r.charCodeAt(d++), 
+                o = e >> 2, 
+                a = (3 & e) << 4 | t >> 4,
+                c = (15 & t) << 2 | n >> 6, 
+                f = 63 & n, 
+                isNaN(t) ? c = f = 64 : isNaN(n) && (f = 64), 
+                h = h + _keyStr.charAt(o) + _keyStr.charAt(a) + _keyStr.charAt(c) + _keyStr.charAt(f);
+            }
+            return h
+        }, 
+
+        base64Decode = function(r) {
+            if (!r) return "";
+            var e, t, n, o, a, c, f, h = "", d = 0;
+            for (r = r.replace(/[^A-Za-z0-9\+\/\=]/g, ""); d < r.length;) 
+            {
+                o = _keyStr.indexOf(r.charAt(d++)),
+                a = _keyStr.indexOf(r.charAt(d++)), 
+                c = _keyStr.indexOf(r.charAt(d++)), 
+                f = _keyStr.indexOf(r.charAt(d++)), 
+                e = o << 2 | a >> 4, 
+                t = (15 & a) << 4 | c >> 2, n = (3 & c) << 6 | f, 
+                h += String.fromCharCode(e), 
+                64 != c && (h += String.fromCharCode(t)), 
+                64 != f && (h += String.fromCharCode(n));
+            }
+            return h = _utf8_decode(h)
+        }, 
+        _utf8_encode = function(str) {
+            str = str.replace(/\r\n/g, "\n");
+            for (var endStr = "", i = 0; i < str.length; i++) {
+                var char = str.charCodeAt(i);
+                128 > char ? endStr += String.fromCharCode(char) : char > 127 && 2048 > char ? (char += String.fromCharCode(char >> 6 | 192), 
+                endStr += String.fromCharCode(63 & char | 128)) : (endStr += String.fromCharCode(char >> 12 | 224), 
+                endStr += String.fromCharCode(char >> 6 & 63 | 128), 
+                endStr += String.fromCharCode(63 & char | 128))
+            }
+            return endStr;
+        }
+        _utf8_decode = function(str) {
+            for (var endStr = "", i = 0, char = c1 = c2 = 0; i < str.length;) {
+                char = str.charCodeAt(i), 
+                128 > char ? (endStr += String.fromCharCode(char), i++) : char > 191 && 224 > char ? (c2 = str.charCodeAt(i + 1),
+                endStr += String.fromCharCode((31 & char) << 6 | 63 & c2), i += 2) : (c2 = str.charCodeAt(i + 1), 
+                c3 = str.charCodeAt(i + 2), 
+                endStr += String.fromCharCode((15 & char) << 12 | (63 & c2) << 6 | 63 & c3), i += 3);
+            }
+            return endStr
+        }
+
+        // 第一个字符报错不变
+        function compileStr(code){ //对字符串进行加密         
+            var c=String.fromCharCode(code.charCodeAt(0)+code.length);  
+            for(var i=1;i<code.length;i++) {        
+                c+=String.fromCharCode(code.charCodeAt(i)+code.charCodeAt(i-1));  
+            }     
+             return escape(c);  
+        } 
+        //字符串进行解密   
+        function uncompileStr(code){        
+            code = unescape(code);        
+            var c=String.fromCharCode(code.charCodeAt(0)-code.length);        
+            for(var i=1;i<code.length;i++){        
+                c+=String.fromCharCode(code.charCodeAt(i)-c.charCodeAt(i-1));        
+            }        
+            return c;   
+        }  
+
+
+    </script>
+    <script>
+        var strAttr = '郑州市二七区';      
+        console.log('1.............');
+        console.log(encodestr(strAttr,d));
+
+        console.log('\n');
+        console.log('2.............');
+        var btiStr = bitEncode('abc',strAttr);
+        console.log(btiStr);
+        console.log(bitEncode('abc',btiStr));
+
+        console.log('\n');
+        console.log('3.............')
+        var utPw =_utf8_encode(strAttr);
+        console.log(utPw)
+        console.log( _utf8_decode(utPw));
+
+        console.log('\n');
+        console.log('4.............')
+        var basePw = base64Encode(strAttr);
+        console.log(basePw)
+        console.log(base64Decode(basePw));
+    </script>
+</body>
+</html>

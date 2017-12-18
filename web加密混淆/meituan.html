@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 
+<style>
+ 
+ 
+ 
+ </style>
+
+</head>
+<body>
+ <script>
+ var accid=23709405;
+ var d = parseInt(accid) % 10;
+ 
+ var str = '君阅南湖小区 (南湖北路650号，贵龙修理厂，一号立井加油站旁)67';
+
+ function encodestr(str, r)
+ {
+ 	if (str) {
+		for (var t = "", i = 0, len = str.length; i < len; i++) {
+			t += String.fromCharCode(str.charCodeAt(i) ^ r);
+		}
+		return t
+	}
+	return ""
+ }
+ document.write(encodestr("吞阀卒湓尊匿%-卒湓匒跪305史）贰龜俫球厇）丅史竎亐劥沼竜旄,32",d));
+
+ document.write('\n')
+ 
+ document.write(encodestr(str,d));
+
+ </script>
+ 
+<h1  style="font-family:ff11" >吞阀卒湓尊匿%-卒湓匒跪305史）贰龜俫球厇）丅史竎亐劥沼竜旄,32</h1>
+
+<p>我的第一个段落。</p>
+
+</body>
+</html>

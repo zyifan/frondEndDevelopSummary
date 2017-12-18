@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>login</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html,body{height:100%;}
+      body { font: 13px Helvetica, Arial; }
+     .formContent{width:400px;height:400px;margin:0 auto;margin-top:100px;border:1px solid #eee;box-shadow:0 0 2px 1px rgba(240,240,240,0.8);}
+     .formContent h3{height:50px;line-height:30px;padding:10px 20px;border-bottom:1px solid #eee;margin-bottom:50px;}
+     .formContent .item{text-align:center;height:50px;line-height: 50px;vertical-align: middel;color:#656565;}
+     .formContent .item input{margin-left:20px;border:1px solid #eee;height:30px;line-height:30px;vertical-align: middle}
+     .formContent .item #subBtn{width:100px;background-color:rgb(51,153,102);color:#fff;border-radius:5px;margin-top:50px;outline:none;height:30px;border:none;cursor:pointer;}
+    </style>
+  </head>
+    
+  <body>     
+      <div class="formContent">
+       <form action="/" method="post">
+            <h3>登录</h3>
+            <div class="item">
+               <label for="name">用户名称：<input required min="3" id="username" type="text" name="name"></label>
+            </div>
+            <div class="item">
+               <label for="pwd">用户密码：<input type="text" name="pwd"></label>
+            </div>
+            <div class="item">
+               <button id="subBtn" >登录</button>
+            </div>  
+        </form>   
+            
+      </div>
+   
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $('#subBtn').click(function(){
+          sessionStorage.setItem('username',$('#username').val());
+          // $('form').submit();  
+      })       
+    
+    </script>
+  </body>
+</html>

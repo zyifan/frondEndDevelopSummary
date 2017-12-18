@@ -1,0 +1,37 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 混淆版 -->
+    <script src="jm_hx.js"></script>
+    <!-- 开发版 -->
+    <!-- <script src="jm_kf.js"></script> -->
+    <script>
+        var str = [321, {
+            key1: "啊撒旦立刻就",
+            key2: 147,
+            key3: [123, "123", "234"],
+            key4: {
+                key5: [123, 23411231231, 345]
+            }
+        }, "啊撒旦立刻就啊送iu请问"];
+        
+        // 获取混淆后的头部信息
+        console.log(jmUtil.getData());
+        
+        // 混淆后的字符串
+        var jm = jmUtil.Enuu(str, true);
+        console.log(jm);
+        
+        // 解密后的字符串
+        console.log(jmUtil.Enuu(jm, false));
+    </script>
+</body>
+
+</html>

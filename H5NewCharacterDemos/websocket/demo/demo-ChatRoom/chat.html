@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <title>chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html,body{height:100%;}
+      body { font: 13px Helvetica, Arial; }
+      .msgLeft{
+        width:80%;
+        float:left;
+        position:relative;
+        height:100%;
+        overflow:hidden;
+      }
+      .msgRight{
+        float:right;
+        width:20%;
+        text-align:center;
+        height:100%;
+        background-color: rgb(51,153,102);
+      }
+      .msgRight img{
+        width:100%;
+        margin-top:100px;
+      }
+      .msgRight p{
+        margin-top:50px;
+        font-size:15px;
+        color:#333;
+      }
+      form {padding: 3px;border-top:1px solid #ddd; position: absolute; bottom: 0; width: 100%; }
+      form textarea { outline:none;border: 0; padding: 10px; width: 100%;resize:none; }
+      form .msgSend{text-align:right;padding:0 15px 10px 15px;}
+      form .msgSend button { width: 100px; background: rgb(51,153,102); border: none; padding: 10px;color:#fff;border-radius:5px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; margin:10px 0;}
+      #messages li.liRight {text-align:right; }
+      #messages li.liLeft {text-align:left; }
+      #messages li b { display:inline-block;color:#fff;background-color:rgb(51,153,102);text-align:center;width:40px;height:40px;line-height:40px; border-radius:5px;}
+      #messages li.liRight b {margin-left:15px;}
+      #messages li.liLeft b {margin-right:15px;}
+    </style>
+  </head>
+    
+  <body>  
+    <div class="msgLeft">
+      <ul id="messages"></ul>
+      <form action="">
+        <textarea id="msgVal" autofocus="true" rows="10"></textarea>
+        <div class="msgSend">
+            <button>发送</button>
+        </div>     
+      </form>
+    </div>
+   <div class="msgRight">
+        <img src="./images/1.png">
+        <p><span id="userText"></span>在线中...</p>
+   </div>
+      
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var username = sessionStorage.getItem('username');
+      $('#userText').text(username);
+
+      var socket = io();
+      $('form').submit(function(){
+        socket.emit('chat message', {user:username,msg:$('#msgVal').val()});
+        $('#msgVal').val('');
+        return false;
+      });
+    
+      socket.on('chat message', function(msg){
+        if(msg.user == username){
+           $('#messages').append($('<li class="liRight">').html('<span>'+msg.msg+'</span><b>'+msg.user+'</b>'));
+        }else{
+           $('#messages').append($('<li class="liLeft">').html('<b>'+msg.user+'</b><span>'+msg.msg+'</span>'));
+        }
+       
+      });
+    </script>
+  </body>
+</html>

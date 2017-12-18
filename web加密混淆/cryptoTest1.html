@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>加密</title>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/crypto-js.min.js"></script>
+</head>
+<body>
+    <script>     
+        var str = '我是中国人'
+        console.log(CryptoJS);
+
+        console.log('\n');
+        console.log('1.........Md5');
+        var md5Str = CryptoJS.MD5(str)
+        console.log(''+md5Str);
+
+        console.log('\n');
+        console.log('2.........HmacMD5');
+        var pwd="password";
+        console.log("你好，欢迎来到开源中国在线工具，这是一个MD5测试 Hmac-MD5:   "+CryptoJS.HmacMD5("你好，欢迎来到开源中国在线工具，这是一个MD5测试",pwd));
+
+        console.log('\n');
+        console.log('3.........Aes');
+        var pwd="我的密码";   
+        var mi=CryptoJS.AES.encrypt("你好，欢迎来到开源中国在线工具，这是一个AES加密测试",pwd);
+        console.log("你好，欢迎来到开源中国在线工具，这是一个AES加密测试----密文:"+mi);
+        
+        var result=CryptoJS.AES.decrypt(mi,pwd).toString(CryptoJS.enc.Utf8);
+        
+        console.log("解密结果："+result);
+
+
+        console.log('\n');
+        console.log('4.........PBKDF2哈希算法');
+       var salt=CryptoJS.enc.Utf8.parse("salt");  //盐
+        
+       var iter=1000;  //迭代次数
+        
+       var mi1=CryptoJS.PBKDF2("你好，欢迎来到开源中国在线工具，这是一个PBKDF2测试", salt,
+                 { keySize: parseInt(4),
+                 iterations: parseInt(iter) }
+                 );
+       
+       console.log("你好，欢迎来到开源中国在线工具，这是一个PBKDF2测试：----------哈希值："+mi1);
+
+
+
+        console.log('\n');
+        console.log('1.........sha1');
+        var shaStr = CryptoJS.SHA1(str)
+        console.log(''+shaStr);
+
+
+        //aes加密
+        function encrypt(word) {
+            var key = CryptoJS.enc.Utf8.parse("1234567890000000");  //加密密钥,16位
+            var iv = CryptoJS.enc.Utf8.parse("1234567890000000"); //加密向量
+            var encrypted = '';
+            if (typeof(word) == 'string') {
+                var srcs = CryptoJS.enc.Utf8.parse(word);
+                encrypted = CryptoJS.AES.encrypt(srcs, key, {
+                    iv: iv,
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                });
+            } else if (typeof(word) == 'object') {//对象格式的转成json字符串
+                data = JSON.stringify(word);
+                var srcs = CryptoJS.enc.Utf8.parse(data);
+                encrypted = CryptoJS.AES.encrypt(srcs, key, {
+                    iv: iv,
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                })
+            }
+            return encrypted.ciphertext.toString();
+        }
+        // aes解密
+        function decrypt(word) {
+            var key = CryptoJS.enc.Utf8.parse("1234567890000000"); //加密密钥,16位
+            var iv = CryptoJS.enc.Utf8.parse("1234567890000000"); //加密向量
+            var encryptedHexStr = CryptoJS.enc.Hex.parse(word);
+            var srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+            var decrypt = CryptoJS.AES.decrypt(srcs, key, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            var decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+            return decryptedStr.toString();
+        }
+        console.log('\n');
+        console.log('aes.........');
+        var aaS = encrypt(str)
+        console.log(aaS);
+        console.log(decrypt(aaS));
+    </script>    
+</body>
+</html>

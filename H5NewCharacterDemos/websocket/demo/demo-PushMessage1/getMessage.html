@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO msg demo</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html,body{height:100%;}
+      body { font: 13px Helvetica, Arial;padding:50px;}
+      h2{margin-bottom:30px;}
+      ul li{
+        line-height:30px;
+        color:#666;
+        border-bottom:1px solid #eee;
+      }
+    </style>
+  </head>
+    
+  <body>  
+    <h2>每隔2s获取一条消息：</h2>
+    <ul id="msgContainer"></ul>
+      
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>     
+      var user = "a"+Math.ceil(Math.random()*20)
+      console.log('reandom');
+      console.log(user);
+
+      var socket = io();
+      console.log('socket...');
+      console.log(socket);
+      socket.emit('new user',user);
+
+      setInterval(function(){
+        console.log('timeout');
+        console.log(user);
+        socket.emit('poling',user,'消息');
+      },2000);
+
+      socket.on('msg', function(msg){
+        $('#msgContainer').append('<li>'+msg+'</li>');
+      });
+    </script>
+  </body>
+</html>

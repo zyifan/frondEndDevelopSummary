@@ -1,0 +1,15 @@
+1、启动mongodb服务：mongod --config "D:\Program Files\MongoDB\Server\3.2\mongo.conf"  
+	
+	命令执行后，浏览器中输入 http://127.0.0.1:27017 看到如下界面即说明启动成功
+
+2、创建MongoDB服务	
+
+	mongod --config "D:\Mongo\mongo.conf"  --install --serviceName "MongoDB"
+
+3、启动MongoDB服务
+
+	net start MongoDB
+
+4、进入到bin目录，输入 mongo.exe，开始操作数据库
+
+

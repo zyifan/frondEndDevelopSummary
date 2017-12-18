@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>webworker demo</title> 
+<style>
+#content{
+    padding:50px;
+}
+#content li{
+    line-height:40px;
+    border-bottom:1px solid #eee;
+}
+</style>
+</head>
+<body>
+
+<p>复杂计算- fibonacci数列结果为：<output id="result"></output></p>
+
+
+<p><strong>注意：</strong> Internet Explorer 9 及更早 IE 版本浏览器不支持 Web Workers.</p>
+
+
+<script>
+
+var result = document.getElementById("result");
+var w;
+function startWorker() {
+    if(typeof(Worker) !== "undefined") {
+        if(typeof(w) == "undefined") {
+            w = new Worker("index.js");
+        }
+        w.onmessage = function(event) {
+            result.innerHTML = event.data;
+            console.log('子程序计算结束')
+        };
+    } else {
+        result.innerHTML = "抱歉，你的浏览器不支持 Web Workers...";
+    }
+}
+
+startWorker();
+console.log('主程序开始...');
+
+setTimeout(function(){
+    console.log('主程序未被堵塞，继续执行了，子程序还在计算中,请等待...' );
+},1000);
+
+console.log('子程序开始计算了...');
+w.postMessage(40);
+
+console.log('主程序末尾...' );
+
+</script>
+
+</body>
+</html>
