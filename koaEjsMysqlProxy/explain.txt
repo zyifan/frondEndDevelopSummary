@@ -1,0 +1,43 @@
+1、mysql -u root -p 
+2、create database koasql
+3、show databases;
+4、use nodesql;
+5、show tables;
+6、目录结构
+    config 存放默认文件
+    lib 存放操作数据库文件
+    middlewares 存放判断登录与否文件
+    public 存放样式文件
+    routes 存放路由文件
+    views 存放模板文件
+    index 程序主文件
+    package.json 包括项目名、作者、依赖等等
+7、npm init  -y
+8、npm install -g cnpm --registry=https://registry.npm.taobao.org
+9、cnpm i koa koa-bodyparser koa-mysql-session koa-router koa-session-minimal koa-static koa-views md5 moment mysql ejs --save
+10、各模块用处
+    koa node框架
+    koa-bodyparser 表单解析中间件
+    koa-mysql-session、koa-session-minimal 处理数据库的中间件
+    koa-router 路由中间件
+    koa-static 静态资源加载中间件
+    ejs 模板引擎
+    md5 密码加密
+    moment 时间中间件
+    mysql 数据库
+    koa-views 模板呈现中间件
+11、
+    使用koa-session-minimal``koa-mysql-session来进行数据库的操作 
+    使用koa-static配置静态资源，目录设置为public 
+    使用ejs模板引擎 
+    使用koa-bodyparser来解析提交的表单信息 
+    使用koa-router做路由    
+
+12、反向代理
+    npm install http-proxy --save    
+    创建proxy.js文件
+    在index.js/app.js 中加入 require('./proxy.js')
+
+13、npm start 运行项目
+
+14、在浏览器中输入localhost 查看项目

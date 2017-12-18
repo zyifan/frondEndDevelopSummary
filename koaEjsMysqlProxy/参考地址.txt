@@ -1,0 +1,4 @@
+步骤地址：http://blog.csdn.net/wclimb/article/details/77890793
+
+npm install 
+npm start
