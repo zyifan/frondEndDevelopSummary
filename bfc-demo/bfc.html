@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+ 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+        <title>无标题文档</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+             
+            #red,
+            #yellow,
+            #orange,
+            #green ,
+            #red1,
+            #yellow1,
+            #orange1,
+            #green1 {
+                width: 100px;
+                height: 100px;
+                float: left;
+            }
+             
+            #red,#red1{
+                background-color: red;
+            }
+             
+            #yellow,#yellow1{
+                background-color: yellow;
+            }
+             
+            #orange,#orange1 {
+                background-color: orange;
+            }
+             
+            #green,#green1 {
+                background-color: green;
+            }
+        </style>
+    </head>
+ 
+    <body>
+        <!-- 该段代码本意要形成两行两列的布局，但是由于#red，#yellow，#orange，#green四个div在同一个布局环境BFC中，因此虽然它们位于两个不同的div（#c1和#c2）中，但仍然不会换行，而是一行四列的排列。若要使之形成两行两列的布局，就要创建两个不同的布局环境，也可以说要创建两个BFC。那到底怎么创建BFC呢？ -->
+        <div style="overflow:hidden;">
+            <div id="c1">
+                <div id="red"> </div>
+                <div id="yellow"> </div>
+            </div>
+            <div id="c2">
+                <div id="orange"> </div>
+                <div id="green"> </div>
+            </div>
+            <p>Here is the text!</p>
+        </div>
+       
+        <br><br><hr><br/><br/>
+
+        <!-- 上面的例子，我再加两行代码，创建两个BFC：#c3{overflow:hidden;} #c4{overflow:hidden;} ,创建了两个布局环境BFC,内部子元素的左浮动不会影响到外部元素。所以#c3和#c4没有受浮动的影响，仍然各自占据一行！-->
+        <div id="c3" style="overflow:hidden;">
+            <div id="red1"> </div>
+            <div id="yellow1"> </div>
+        </div>
+        <div id="c4" style="overflow:hidden;">
+            <div id="orange1"> </div>
+            <div id="green1"> </div>
+        </div>
+        <p>Here is the text!</p>
+
+        <div>
+            <a href="https://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html">参考地址1</a>
+            <a href="https://www.cnblogs.com/nujufoul/p/7092520.html">参考地址2</a>
+        </div>
+    </body>
+ 
+</html>
