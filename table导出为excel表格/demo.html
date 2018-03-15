@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table导出为excel表格</title>
+</head>
+<body>
+    <table border="1" id="dataTable">
+
+        <tr>
+      
+          <th>Month</th>
+      
+          <th>Savings</th>
+      
+        </tr>
+      
+        <tr>
+      
+          <td>January</td>
+      
+          <td>$100</td>
+      
+        </tr>
+      
+      </table>
+
+      <input id="Button1" type="button" value="导出EXCEL"  onclick="javascript:tableToExcel(document.getElementById('dataTable'), '导出表格');" />
+      <script>
+          var tableToExcel = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = 
+                '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">'+
+                '<head>'+
+                    '<!--[if gte mso 9]>'+
+                        '<xml>'+
+                            '<x:ExcelWorkbook>'+
+                                '<x:ExcelWorksheets>'+
+                                    '<x:ExcelWorksheet>'+
+                                        '<x:Name>{worksheet}</x:Name>'+
+                                        '<x:WorksheetOptions>'+
+                                            '<x:DisplayGridlines/>'+
+                                        '</x:WorksheetOptions>'+
+                                    '</x:ExcelWorksheet>'+
+                                '</x:ExcelWorksheets>'+
+                            '</x:ExcelWorkbook>'+
+                        '</xml>'+
+                    '<![endif]-->'+
+                    '</head>'+
+                        '<body>'+
+                            '<table>{table}</table>'+
+                        '</body>'+
+                    '</html>',
+
+                base64 = function(s) {
+                    return window.btoa(unescape(encodeURIComponent(s)))
+                },
+
+                format = function(s, c) {
+                    return s.replace(/{(\w+)}/g, function(m, p) {
+                        return c[p];
+                    })
+                }
+
+                return function(table, name) {
+                    if (!table.nodeType) table = document.getElementById(table);
+                    
+                    var ctx = {
+                        worksheet: name || 'Worksheet',
+                        table: table.innerHTML
+                    };
+
+                    window.location.href = uri + base64(format(template, ctx));
+
+                }
+
+            })();
+      </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+html{
+    height:100%;
+    body{
+        height:100%;
+        background-color:#fff!important;
+    }
+}
+// 充值table cell样式
+.el-table .cell{
+    white-space: nowrap;
+}
+.spinx{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.testManager{
+    text-align:left;
+    height:100%;
+    overflow:hidden;
+    position:relative;
+    .interface{
+        position:relative;
+        width:100%;
+        height:100%;
+    }
+    .tree-container{
+        height:100%;
+        background-color:#fff;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        padding-left:20px;
+        padding-bottom:20px;
+        padding-top:12px;
+        border:1px solid #e6ebf5;
+    }
+}
+.testManager .container{
+    width:100%;
+    position:absolute;
+    left:0;
+    top:40px;
+    bottom:0;
+    right:0;
+}
+.testSearch{
+    height:40px;
+    margin-bottom:10px;
+    position:relative;
+    z-index:5;
+    border-bottom:1px solid #e6ebf5;
+    overflow:hidden;
+    .testSearch-select{
+        width:80%;
+    }
+    .testSearch-btn{
+        position:absolute;
+        top:0;
+        right:10px;
+    }
+}
+.el-main{
+    padding-left:15px;
+    padding-right:15px;
+}
+.interface .el-tag--small {
+    height: 14px;
+    padding: 0 5px;
+    line-height: 12px;
+}
+.interface .el-select__tags{
+    padding-left:5px;
+}
+
+.utable-widthauto .el-table__body, .el-table__footer, .el-table__header{
+    width:auto!important;
+}
+
+.viewReport .vrCard .el-tabs__content {
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    top: 50px;
+    width: 100%;
+    overflow-y: auto;
+}
+// 定义布局为盒模型
+.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+// 盒模型垂直布局
+.flex-v {
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+// 子元素占据剩余的空间
+.flex-1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+// 子元素垂直居中
+.flex-align-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+// 子元素水平居中
+.flex-pack-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+// 子元素两端对齐
+.flex-pack-justify {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+// 
+.viewReport .vrCard .vrCard-body .el-loading-parent--relative{
+    height:100%;
+}
