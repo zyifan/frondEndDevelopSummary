@@ -1,0 +1,101 @@
+npm init
+npm i express@4.14.0 --save
+npm install -g supervisor
+
+supervisor --harmony index 启动程序
+
+npm i ejs --save
+
+
+
+npm i config-lite connect-flash connect-mongo ejs express express-formidable express-session marked moment mongolass objectid-to-timestamp sha1 winston express-winston --save
+
+1、express: web 框架
+2、express-session: session 中间件
+3、connect-mongo: 将 session 存储于 mongodb，结合 express-session 使用
+4、connect-flash: 页面通知提示的中间件，基于 session 实现
+5、ejs: 模板
+6、express-formidable: 接收表单及文件的上传中间件
+7、config-lite: 读取配置文件
+8、marked: markdown 解析
+9、moment: 时间格式化
+10、mongolass: mongodb 驱动
+11、objectid-to-timestamp: 根据 ObjectId 生成时间戳
+12、sha1: sha1 加密，用于密码加密
+13、winston: 日志
+14、express-winston: 基于 winston 的用于 express 的日志中间件
+
+15、mocha 和 suptertest 是常用的测试组合，通常用来测试 restful 的 api 接口
+16、istanbul 是一个常用的生成测试覆盖率的库，它会将测试的结果报告生成 html 页面，并放到项目根目录的 coverage 目录下
+
+	我们写测试肯定想覆盖所有的情况（包括各种出错的情况及正确时的情况），但光靠想需要写哪些测试是不行的，总也会有疏漏，最简单的办法就是可以直观的看出测试是否覆盖了所有的代码，这就是测试覆盖率，即被测试覆盖到的代码行数占总代码行数的比例。
+
+	注意：即使测试覆盖率达到 100% 也不能说明你的测试覆盖了所有的情况，只能说明基本覆盖了所有的情况。
+	
+	package.json的"scripts":{ "test": "mocha --harmony test"}修改为: 
+    // "test": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",	
+    或"test": "node --harmony ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
+
+17、申请 MLab 
+	MLab (前身是 MongoLab) 是一个 mongodb 云数据库提供商，（https://mlab.com/signup/）
+	我们可以选择 500MB 空间的免费套餐用来测试。注册成功后，点击右上角的 Create New 创建一个数据库（如: myblog）
+
+18、pm2 是 Node.js 的生产环境进程管理工具，就是我们常说的进程守护工具，可以用来在生产环境中进行自动重启、日志记录、错误预警等等
+	当我们的博客要部署到线上服务器时，不能单纯的靠 node index 或者 supervisor index 来启动了，因为我们断掉 SSH 连接后服务就终止了，这时我们就需要像 pm2 或者 forever 这样的进程管理器了。
+	npm install pm2 -g
+
+	"scripts": {
+	  "test": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
+	  "start": "NODE_ENV=production pm2 start index.js --node-args='--harmony' --name 'myblog'"
+	}
+
+	pm2 常用命令:
+	pm2 start/stop: 启动/停止程序
+	pm2 reload/restart [id|name]: 重启程序
+	pm2 logs [id|name]: 查看日志
+	pm2 l/list: 列出程序列表
+	更多命令请使用 pm2 -h 查看。
+
+19、部署到 Heroku：Heroku 是一个支持多种编程语言的云服务平台，Heroku 也提供免费的基础套餐供开发者测试使用。
+	Heroku 是一个支持多种编程语言的云服务平台，Heroku 也提供免费的基础套餐供开发者测试使用。现在，我们将论坛部署到 Heroku。
+	注意：新版 heroku 会有填写信用卡的步骤，如果没有请跳过本节。
+	首先，需要到 https://toolbelt.heroku.com/ 下载安装 Heroku 的命令行工具包 toolbelt。然后登录（如果没有账号，请注册）到 Heroku 的 Dashboard，点击右上角 New -> Create New App 创建一个应用。创建成功后运行：
+	$ heroku login
+
+	填写正确的 email 和 password 验证通过后，本地会产生一个 SSH public key。在部署到 Heroku 之前，我们需要对代码进行简单的修改。如下：
+
+	删掉 .gitignore 中：
+	config/*
+	!config/default.*
+
+	因为我们无法登录到 Heroku 主机创建 production 配置文件，所以这里将 production 配置也上传到 Heroku。
+
+	打开 index.js，将 app.listen 修改为：
+	const port = process.env.PORT || config.port;
+	app.listen(port, function () {
+		console.log(`${pkg.name} listening on port ${port}`);
+	});
+
+	因为 Heroku 会动态分配端口，所以不能用配置文件里写死的端口。
+
+	然后输入以下命令：
+	$ git init
+	$ heroku git:remote -a 你的应用名称
+	$ git add .
+	$ git commit -am "first blood"
+	$ git push heroku master
+
+	稍后，我们的论坛就部署成功了。访问：
+	https://你的应用名称.herokuapp.com/
+
+20、部署到 UCloud
+
+	UCloud 是国内的一家云计算服务商，接下来我们尝试将博客搭在 UCloud 上。
+	创建主机
+
+	注册 UCloud
+	点击左侧的 云主机，然后点击 创建主机，统统选择最低配置
+	右侧付费方式选择 按时（每小时），点击 立即购买
+	在支付确认页面，点击 确认支付	
+
+
