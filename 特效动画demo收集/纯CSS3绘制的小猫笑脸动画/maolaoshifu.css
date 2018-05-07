@@ -14,6 +14,7 @@
     width: 400px;
 }
 
+/* 头 */
 .mao_head {
     margin: 0 auto;
     width: 400px;
@@ -36,13 +37,14 @@
     overflow: hidden;
 }
 
-    .huawen > div:first-child {
-        height: 160px;
-        width: 90px;
-        background: #F0AC6B;
-    }
+.huawen>div:first-child {
+    height: 160px;
+    width: 90px;
+    background: #F0AC6B;
+}
 
 /*耳朵*/
+
 .erduo {
     width: 374px;
     height: 120px;
@@ -52,43 +54,50 @@
     margin-left: -187px;
     border-radius: 0% 0% 0% 0%;
 }
-    /*左耳*/
-    .erduo > div:first-child {
-        height: 200px;
-        width: 160px;
-        border: 2px solid #2e2e2e;
-        background: #f3f3f3;
-        transform: rotate(-15deg);
-        -ms-transform: rotate(-15deg);
-        -moz-transform: rotate(-15deg);
-        -webkit-transform: rotate(-15deg);
-        -o-transform: rotate(-15deg);
-        border-radius: 4% 80% 0% 50%;
-        position: absolute;
-        left: -20px;
-        top: 0px;
-        transition: transform 1s,left 1s;
-    }
-    /*右耳*/
-    .erduo > div:last-child {
-        height: 180px;
-        width: 160px;
-        border: 2px solid #2e2e2e;
-        background: #f3f3f3;
-        transform: rotate(15deg);
-        -ms-transform: rotate(15deg);
-        -moz-transform: rotate(15deg);
-        -webkit-transform: rotate(15deg);
-        -o-transform: rotate(15deg);
-        border-radius: 80% 4% 50% 0%;
-        position: absolute;
-        right: -20px;
-        top: 0px;
-          transition: transform 1s,right 1s;
-    }
-/*鼠标浮动耳朵样式*/
+
 /*左耳*/
-.mao:hover .erduo > div:first-child {
+
+.erduo>div:first-child {
+    height: 200px;
+    width: 160px;
+    border: 2px solid #2e2e2e;
+    background: #f3f3f3;
+    transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    border-radius: 4% 80% 0% 50%;
+    position: absolute;
+    left: -20px;
+    top: 0px;
+    transition: transform 1s, left 1s;
+}
+
+/*右耳*/
+
+.erduo>div:last-child {
+    height: 180px;
+    width: 160px;
+    border: 2px solid #2e2e2e;
+    background: #f3f3f3;
+    transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -webkit-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    border-radius: 80% 4% 50% 0%;
+    position: absolute;
+    right: -20px;
+    top: 0px;
+    transition: transform 1s, right 1s;
+}
+
+/*鼠标浮动耳朵样式*/
+
+/*左耳*/
+
+.mao:hover .erduo>div:first-child {
     left: -10px;
     transform: rotate(0deg);
     -ms-transform: rotate(0deg);
@@ -97,10 +106,10 @@
     -o-transform: rotate(0deg);
     border-radius: 4% 80% 0% 60%;
     /*transition: all 1s;*/
-     /*transition: transform 1s,left 1s;*/
+    /*transition: transform 1s,left 1s;*/
 }
 
-.mao:hover .erduo > div:last-child {
+.mao:hover .erduo>div:last-child {
     right: -10px;
     transform: rotate(0deg);
     -ms-transform: rotate(0deg);
@@ -110,7 +119,9 @@
     border-radius: 80% 4% 60% 0%;
     /*transition: transform 1s,right 1s;*/
 }
+
 /*眼睛*/
+
 .yanjing {
     height: 60px;
     width: 300px;
@@ -121,7 +132,9 @@
     margin-left: -150px;
     overflow: hidden;
 }
+
 /*左眼*/
+
 .yanquan {
     height: 100px;
     width: 100px;
@@ -130,22 +143,25 @@
     overflow: hidden;
     position: absolute;
 }
-    /*眼珠子 左*/
-    .yanquan > div:first-child {
-        height: 100px;
-        width: 30px;
-        background-color: #2e2e2e;
-        margin-left: 35px;
-        transition:all 1s;
-          /*transition-property: width;
+
+/*眼珠子 左*/
+
+.yanquan>div:first-child {
+    height: 100px;
+    width: 30px;
+    background-color: #2e2e2e;
+    margin-left: 35px;
+    transition: all 1s;
+    /*transition-property: width;
        transition-duration: 2s;*/
-    }
-.mao:hover .yanquan > div:first-child {
-  width:40px;
+}
+
+.mao:hover .yanquan>div:first-child {
+    width: 40px;
     margin-left: 30px;
     /*transition:all 1s;*/
-  
 }
+
 .yanquan_hedding {
     height: 100px;
     width: 180px;
@@ -155,7 +171,7 @@
     margin-top: 50px;
     margin-left: -40px;
     position: absolute;
-     transition: margin-top 1s;
+    transition: margin-top 1s;
 }
 
 .hong {
@@ -167,9 +183,9 @@
     /*top: 64px;*/
     left: 18px;
     border-radius: 50% 50% 50% 50%;
-    background-image: -moz-radial-gradient( 50% 50%, rgba(253,214,240,0.8) 0%, rgba(253,224,244,0.8) 66%, rgba(253,234,247,0.8) 100%);
-    background-image: -webkit-radial-gradient( 50% 50%, rgba(253,214,240,0.8) 0%, rgba(253,224,244,0.8) 66%, rgba(253,234,247,0.8) 100%);
-    background-image: -ms-radial-gradient( 50% 50%, rgba(253,214,240,0.8) 0%, rgba(253,224,244,0.8) 66%, rgba(253,234,247,0.8) 100%);
+    background-image: -moz-radial-gradient( 50% 50%, rgba(253, 214, 240, 0.8) 0%, rgba(253, 224, 244, 0.8) 66%, rgba(253, 234, 247, 0.8) 100%);
+    background-image: -webkit-radial-gradient( 50% 50%, rgba(253, 214, 240, 0.8) 0%, rgba(253, 224, 244, 0.8) 66%, rgba(253, 234, 247, 0.8) 100%);
+    background-image: -ms-radial-gradient( 50% 50%, rgba(253, 214, 240, 0.8) 0%, rgba(253, 224, 244, 0.8) 66%, rgba(253, 234, 247, 0.8) 100%);
     opacity: 0.0;
     /*transition: opacity 0.5s ease-in 0.2s;*/
 }
@@ -180,7 +196,9 @@
     background: red;
     position: absolute;
 }
+
 /*眼睛浮动属性*/
+
 .mao:hover .yanquan_hedding {
     margin-top: 30px;
     /*transition: margin-top 1s;*/
@@ -193,7 +211,9 @@
 }
 
 /*脸部花纹*/
+
 /*左边花纹*/
+
 .face_huawen {
     height: 80px;
     width: 380px;
@@ -204,7 +224,7 @@
     margin-left: -190px;
 }
 
-.face_huawen_huawen > div:first-child {
+.face_huawen_huawen>div:first-child {
     width: 30px;
     height: 10px;
     border-top: 6px #E53941 solid;
@@ -217,7 +237,7 @@
     margin-left: 20px;
 }
 
-.face_huawen_huawen > div:nth-child(2) {
+.face_huawen_huawen>div:nth-child(2) {
     width: 20px;
     height: 6px;
     background-color: #E53941;
@@ -230,7 +250,7 @@
     margin-left: 20px;
 }
 
-.face_huawen_huawen > div:nth-child(3) {
+.face_huawen_huawen>div:nth-child(3) {
     /*margin-top:10px;*/
     width: 32px;
     height: 10px;
@@ -244,7 +264,7 @@
     margin-left: 8px;
 }
 
-.face_huawen_huawen > div:nth-child(4) {
+.face_huawen_huawen>div:nth-child(4) {
     margin-top: 20px;
     width: 26px;
     height: 20px;
@@ -258,7 +278,7 @@
     margin-left: 28px;
 }
 
-.face_huawen_huawen > div:last-child {
+.face_huawen_huawen>div:last-child {
     width: 22px;
     height: 10px;
     border-bottom: 3px #E53941 solid;
@@ -271,15 +291,21 @@
     margin-left: 40px;
     margin-top: -8px;
 }
+
 /*右边花纹*/
+
 .huawen_right {
     float: right;
     transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg); /* Safari 和 Chrome */
-    -moz-transform: rotateY(180deg); /* Firefox */
+    -webkit-transform: rotateY(180deg);
+    /* Safari 和 Chrome */
+    -moz-transform: rotateY(180deg);
+    /* Firefox */
     margin-top: -85px;
 }
+
 /*鼻子*/
+
 .bizi {
     width: 30px;
     height: 36px;
@@ -290,13 +316,13 @@
     z-index: 30;
 }
 
-    .bizi > div:first-child {
-        width: 30px;
-        height: 10px;
-        border-bottom: 8px solid #2e2e2e;
-        border-radius: 0% 0% 50% 50%;
-        margin-top: -10px;
-    }
+.bizi>div:first-child {
+    width: 30px;
+    height: 10px;
+    border-bottom: 8px solid #2e2e2e;
+    border-radius: 0% 0% 50% 50%;
+    margin-top: -10px;
+}
 
 .zuiba_box {
     width: 200px;
@@ -314,50 +340,54 @@
     margin-top: 6px;
 }
 
-    .zuiba > div:first-child {
-        width: 4px;
-        height: 8px;
-        background: #2e2e2e;
-        margin-left: 13px;
-    }
-    /*右半边嘴巴*/
-    .zuiba > div:nth-child(2) {
-        width: 50px;
-        height: 40px;
-        border-bottom: 4px solid #2e2e2e;
-        border-left: 4px solid #2e2e2e;
-        border-radius:40% 0% 20% 50%;
-        margin-left: 13px;
-        margin-top: -26px;
-        position:absolute;
-            transition:  border-radius  1s;
-    }
-    /*左半边嘴巴*/
-    .zuiba > div:nth-child(3) {
-        width: 50px;
-        height: 40px;
-        border-bottom: 4px solid #2e2e2e;
-        border-right: 4px solid #2e2e2e;
-        border-radius:0% 40% 50% 20%;
-        margin-left: -38px;
-        margin-top: -26px;
-        position:absolute;
-            transition:  border-radius  1s;
-       
-    }
+.zuiba>div:first-child {
+    width: 4px;
+    height: 8px;
+    background: #2e2e2e;
+    margin-left: 13px;
+}
 
-.mao:hover .zuiba > div:nth-child(2) {
+/*右半边嘴巴*/
+
+.zuiba>div:nth-child(2) {
+    width: 50px;
+    height: 40px;
+    border-bottom: 4px solid #2e2e2e;
+    border-left: 4px solid #2e2e2e;
+    border-radius: 40% 0% 20% 50%;
+    margin-left: 13px;
+    margin-top: -26px;
+    position: absolute;
+    transition: border-radius 1s;
+}
+
+/*左半边嘴巴*/
+
+.zuiba>div:nth-child(3) {
+    width: 50px;
+    height: 40px;
+    border-bottom: 4px solid #2e2e2e;
+    border-right: 4px solid #2e2e2e;
+    border-radius: 0% 40% 50% 20%;
+    margin-left: -38px;
+    margin-top: -26px;
+    position: absolute;
+    transition: border-radius 1s;
+}
+
+.mao:hover .zuiba>div:nth-child(2) {
     border-radius: 50% 50% 50% 50%;
-          width: 40px;
-           /*transition:  border-radius  1s ;*/
+    width: 40px;
+    /*transition:  border-radius  1s ;*/
 }
-.mao:hover .zuiba > div:nth-child(3) {
-   
-         width: 40px;
-          margin-left: -30px;
-          border-radius: 50% 50% 50% 50%;
-          /*transition:  border-radius  1s;*/
+
+.mao:hover .zuiba>div:nth-child(3) {
+    width: 40px;
+    margin-left: -30px;
+    border-radius: 50% 50% 50% 50%;
+    /*transition:  border-radius  1s;*/
 }
+
 .ceshi {
     width: 26px;
     height: 26px;
